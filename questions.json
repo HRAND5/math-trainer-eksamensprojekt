@@ -1,0 +1,18 @@
+[
+    {
+        "id": 0,
+        "type": "multiple-choice",
+        "rating": 100,
+        "question": "Hvor mange løsninger er der til en andengradsligning på formen 0=ax^2+bx+c?",
+        "answer": "0, 1 eller 2",
+        "alternatives": ["Altid 1", "3 eller 4", "Altid 2"]
+    },
+    {
+        "id": 1,
+        "type": "single-answer",
+        "rating": 200,
+        "question": "Hvad er produktet af 2 og 4?",
+        "answer": "8",
+        "alternatives": []
+    }
+]
