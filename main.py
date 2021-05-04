@@ -1,53 +1,42 @@
-import json
-from prettytable import PrettyTable, PLAIN_COLUMNS
+import wx
+import gui
+import question
 
-filename = "questions.json"
+class testFrame(gui.MainFrame):
+    def __init__(self, parent):
+        gui.MainFrame.__init__(self, parent)
 
-def get_questions(file):
-    with open(file, "r") as f:
-        return json.load(f)
+    def Start( self, event ):
+        parse_question(multiple, questions[0])
+        multiple.Show(True)
+        self.Close()
 
 
-class Question:
-    def __init__(self, question_dict):
-        self.question_id = self.qid = question_dict.get("id") 
-        self.type = question_dict.get("type")
-        self.rating = question_dict.get("rating")
-        self.question = question_dict.get("question")
-        self.answer = question_dict.get("answer")
-        self.alternatives = question_dict.get("alternatives")
+class Multiple(gui.MultipleChoice):
+    def __init__(self, parent):
+        gui.MultipleChoice.__init__(self, parent)
     
-    def stringify(self):
-        """Method to format the question in a string format to easily output in connsole."""
-        t = PrettyTable()
-        t.field_names = [" ", "  "]
-        rows = [["ID", self.qid],
-                ["Type", self.type],
-                ["Rating", self.rating],
-                ["Question", self.question],
-                ["Answer", self.answer]]
+    def indsend_knap( self, event ):
+        print("indsend")
     
-        if self.type == "multiple-choice":
-            a = ""
-            for i, option in enumerate(self.alternatives):
-                if i + 2 < len(self.alternatives):
-                    a += f"'{option}', " 
-                elif i + 2 == len(self.alternatives):
-                    a += f"'{option}' and "
-                else:
-                    a += f"'option'"
-            rows.append(["Alternative answers", a])
+    def luk(self, event):
+        self.Close()
+        main_frame.Show(True)
 
-        t.add_rows(rows)
-        t.align = "l"
-        t.set_style(PLAIN_COLUMNS)
-        return t.get_string()
 
-questions = [] 
+def parse_question(frame, q):
+    if q.type == "multiple-choice":
+        frame.question.SetValue(q.question)
+    elif q.type == "single-answer":
+        pass
 
-for q in get_questions(filename):
-    questions.append(Question(q))
 
-for q in questions:
-    print(q.stringify())
-    print("---------------")
+questions = question.fetch_questions()
+
+app = wx.App(False)
+main_frame = testFrame(None)
+multiple = Multiple(None)
+
+main_frame.Show(True)
+
+app.MainLoop()
