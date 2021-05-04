@@ -27,8 +27,13 @@ class MainFrame ( wx.Frame ):
 		self.startTekst.Wrap( -1 )
 		bSizer1.Add( self.startTekst, 1, wx.ALL|wx.EXPAND, 5 )
 		
-		self.SeAndetVindue = wx.Button( self, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer1.Add( self.SeAndetVindue, 1, wx.ALL|wx.EXPAND, 5 )
+		self.rating = wx.TextCtrl( self, wx.ID_ANY, u"Din rating er:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.rating.Enable( False )
+		
+		bSizer1.Add( self.rating, 0, wx.ALL, 5 )
+		
+		self.start = wx.Button( self, wx.ID_ANY, u"Start", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer1.Add( self.start, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		
 		self.SetSizer( bSizer1 )
@@ -37,7 +42,7 @@ class MainFrame ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
-		self.SeAndetVindue.Bind( wx.EVT_BUTTON, self.Start )
+		self.start.Bind( wx.EVT_BUTTON, self.Start )
 	
 	def __del__( self ):
 		pass
@@ -69,8 +74,8 @@ class MultipleChoice ( wx.Frame ):
 		bSizer4 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		multiple_radioChoices = [ u"svar 1", u"svar 2", u"svar 3", u"svar 4" ]
-		self.multiple_radio = wx.RadioBox( self, wx.ID_ANY, u"Svar", wx.DefaultPosition, wx.DefaultSize, multiple_radioChoices, 1, wx.RA_SPECIFY_COLS )
-		self.multiple_radio.SetSelection( 1 )
+		self.multiple_radio = wx.RadioBox( self, wx.ID_ANY, u"Svarmuligheder", wx.DefaultPosition, wx.DefaultSize, multiple_radioChoices, 1, wx.RA_SPECIFY_COLS )
+		self.multiple_radio.SetSelection( 0 )
 		bSizer4.Add( self.multiple_radio, 1, wx.ALL|wx.EXPAND, 5 )
 		
 		self.indsend = wx.Button( self, wx.ID_ANY, u"Checksvar", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -81,8 +86,22 @@ class MultipleChoice ( wx.Frame ):
 		
 		self.svar_check_tekst = wx.TextCtrl( self, wx.ID_ANY, u"Dit svar er: ", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.svar_check_tekst.Enable( False )
+		self.svar_check_tekst.Hide()
 		
 		bSizer3.Add( self.svar_check_tekst, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.luk = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer6.Add( self.luk, 0, wx.ALL, 5 )
+		
+		self.next = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.next.Hide()
+		
+		bSizer6.Add( self.next, 0, wx.ALL, 5 )
+		
+		
+		bSizer3.Add( bSizer6, 1, wx.EXPAND, 5 )
 		
 		
 		self.SetSizer( bSizer3 )
@@ -92,6 +111,8 @@ class MultipleChoice ( wx.Frame ):
 		
 		# Connect Events
 		self.indsend.Bind( wx.EVT_BUTTON, self.indsend_knap )
+		self.luk.Bind( wx.EVT_BUTTON, self.OnLuk )
+		self.next.Bind( wx.EVT_BUTTON, self.OnNext )
 	
 	def __del__( self ):
 		pass
@@ -99,6 +120,86 @@ class MultipleChoice ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def indsend_knap( self, event ):
+		event.Skip()
+	
+	def OnLuk( self, event ):
+		event.Skip()
+	
+	def OnNext( self, event ):
+		event.Skip()
+	
+
+###########################################################################
+## Class SingleAnswer
+###########################################################################
+
+class SingleAnswer ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Single Answer", pos = wx.DefaultPosition, size = wx.Size( 1023,326 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer4 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.Question = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.Question.Enable( False )
+		
+		bSizer4.Add( self.Question, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		bSizer5 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.m_staticText2 = wx.StaticText( self, wx.ID_ANY, u"Svar:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText2.Wrap( -1 )
+		self.m_staticText2.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_INFOTEXT ) )
+		
+		bSizer5.Add( self.m_staticText2, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.svar = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.svar, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.check_svar = wx.Button( self, wx.ID_ANY, u"Check Svar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.check_svar, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		
+		bSizer4.Add( bSizer5, 1, wx.EXPAND, 5 )
+		
+		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
+		
+		self.luk = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer6.Add( self.luk, 0, wx.ALL, 5 )
+		
+		self.next = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.next.Hide()
+		
+		bSizer6.Add( self.next, 0, wx.ALL, 5 )
+		
+		
+		bSizer4.Add( bSizer6, 1, wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( bSizer4 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.check_svar.Bind( wx.EVT_BUTTON, self.CheckSvar )
+		self.luk.Bind( wx.EVT_BUTTON, self.OnLuk )
+		self.next.Bind( wx.EVT_BUTTON, self.OnNext )
+	
+	def __del__( self ):
+		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def CheckSvar( self, event ):
+		event.Skip()
+	
+	def OnLuk( self, event ):
+		event.Skip()
+	
+	def OnNext( self, event ):
 		event.Skip()
 	
 
