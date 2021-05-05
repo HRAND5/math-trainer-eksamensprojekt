@@ -9,14 +9,32 @@ def get_questions(file):
 
 
 class Question:
-    def __init__(self, question_dict):
-        self.question_id = self.qid = question_dict.get("id") 
-        self.type = question_dict.get("type")
-        self.rating = question_dict.get("rating")
-        self.question = question_dict.get("question")
-        self.answer = question_dict.get("answer")
-        self.alternatives = question_dict.get("alternatives")
+    def __init__(self, question_dict=None, qid=None, t=None, rating=None, question=None, answer=None, alternatives=None):
+        if question_dict is not None:
+            self.question_id = self.qid = question_dict.get("id") 
+            self.type = question_dict.get("type")
+            self.rating = question_dict.get("rating")
+            self.question = question_dict.get("question")
+            self.answer = question_dict.get("answer")
+            self.alternatives = question_dict.get("alternatives")
+        else:
+            self.question_id = self.qid = qid
+            self.type = t
+            self.rating = rating
+            self.question = question
+            self.answer = answer
+            self.alternatives = alternatives
     
+    def to_dict(self):
+        return {
+            "id": self.qid,
+            "type": self.type,
+            "rating": self.rating,
+            "question": self.question,
+            "answer": self.answer,
+            "alternatives": self.alternatives
+        }
+
     def stringify(self):
         """Method to format the question in a string format to easily output in connsole."""
         t = PrettyTable()
@@ -48,5 +66,5 @@ class Question:
 def fetch_questions():
     questions = [] 
     for q in get_questions(filename):
-        questions.append(Question(q))
+        questions.append(Question(question_dict=q))
     return questions

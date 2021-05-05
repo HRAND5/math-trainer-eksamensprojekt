@@ -3,9 +3,13 @@
         "id": 0,
         "type": "multiple-choice",
         "rating": 1000,
-        "question": "Hvor mange løsninger er der til en andengradsligning på formen 0=ax^2+bx+c?",
+        "question": "Hvor mange l\u00f8sninger er der til en andengradsligning p\u00e5 formen 0=ax^2+bx+c?",
         "answer": "0, 1 eller 2",
-        "alternatives": ["Altid 1", "3 eller 4", "Altid 2"]
+        "alternatives": [
+            "Altid 1",
+            "3 eller 4",
+            "Altid 2"
+        ]
     },
     {
         "id": 1,
