@@ -59,12 +59,25 @@ def show_single(q):
     single.Show(True)
 
 
-def new_question():
-    n = random.randint(0, len(questions)-1)
-    if questions[n].type == "multiple-choice":
-        show_multiple(questions[n])
-    elif questions[n].type == "single-answer":
-        show_single(questions[n])
+class Matchmaker:
+    def __init__(self, questions):
+        self.questions = questions
+        self.last = ""
+
+    def new_question(self, elo):
+        sorted_questions = sorted(questions, key=lambda x: abs(elo - x.rating))
+        chosen_list = []
+
+        for q in sorted_questions:
+            if q.rating == sorted_questions[0].rating:
+                chosen_list.append(q)
+        print(chosen_list)
+        chosen = random.choice(chosen_list)
+        
+        if chosen.type == "multiple-choice":
+            show_multiple(chosen)
+        elif chosen.type == "single-answer":
+            show_single(chosen)
 
 
 class Main(gui.MainFrame):
@@ -73,7 +86,7 @@ class Main(gui.MainFrame):
         self.rating.SetLabel(f"Rating: {get_elo()}")
 
     def Start( self, event ):
-        new_question()
+        matchmaker.new_question(get_elo())
         self.Close()
     
     def OnAbout(self, event):
@@ -103,7 +116,7 @@ class Multiple(gui.MultipleChoice):
     
     def OnNext(self, event):
         self.Close()
-        new_question()
+        matchmaker.new_question(get_elo())
 
     def OnLuk(self, event):
         self.Close()
@@ -147,7 +160,7 @@ class Single(gui.SingleAnswer):
     
     def OnNext(self, event):
         self.Close()
-        new_question()
+        matchmaker.new_question(get_elo())
     
     def OnAbout(self, event):
         about = About(None)
@@ -169,6 +182,8 @@ questions = question.fetch_questions()
 
 app = wx.App(False)
 main_frame = Main(None)
+
+matchmaker = Matchmaker(questions)
 
 main_frame.Show(True)
 
