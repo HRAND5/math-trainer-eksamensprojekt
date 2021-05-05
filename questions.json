@@ -14,7 +14,7 @@
     {
         "id": 1,
         "type": "single-answer",
-        "rating": 1000,
+        "rating": 1100,
         "question": "Hvad er produktet af 2 og 4?",
         "answer": "8",
         "alternatives": []

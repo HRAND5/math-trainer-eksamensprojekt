@@ -62,18 +62,26 @@ def show_single(q):
 class Matchmaker:
     def __init__(self, questions):
         self.questions = questions
-        self.last = ""
+        self.last = None
 
     def new_question(self, elo):
         sorted_questions = sorted(questions, key=lambda x: abs(elo - x.rating))
+        
+        if self.last is not None:
+            for q in sorted_questions:
+                if q.qid == self.last:
+                    sorted_questions.remove(q)
+                    break
+        
         chosen_list = []
-
         for q in sorted_questions:
             if q.rating == sorted_questions[0].rating:
                 chosen_list.append(q)
-        print(chosen_list)
+        
         chosen = random.choice(chosen_list)
         
+        self.last = chosen.qid
+
         if chosen.type == "multiple-choice":
             show_multiple(chosen)
         elif chosen.type == "single-answer":
