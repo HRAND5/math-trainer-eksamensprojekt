@@ -84,18 +84,17 @@ class MultipleChoice ( wx.Frame ):
 		
 		bSizer3.Add( bSizer4, 1, wx.EXPAND, 5 )
 		
-		self.svar_check_tekst = wx.TextCtrl( self, wx.ID_ANY, u"Dit svar er: ", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.svar_check_tekst = wx.TextCtrl( self, wx.ID_ANY, u" ", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.svar_check_tekst.Enable( False )
-		self.svar_check_tekst.Hide()
 		
-		bSizer3.Add( self.svar_check_tekst, 1, wx.ALL|wx.EXPAND, 5 )
+		bSizer3.Add( self.svar_check_tekst, 0, wx.ALL, 5 )
 		
 		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
 		
-		self.luk = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.luk = wx.Button( self, wx.ID_ANY, u"Luk", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer6.Add( self.luk, 0, wx.ALL, 5 )
 		
-		self.next = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.next = wx.Button( self, wx.ID_ANY, u"Næste", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.next.Hide()
 		
 		bSizer6.Add( self.next, 0, wx.ALL, 5 )
@@ -136,7 +135,7 @@ class MultipleChoice ( wx.Frame ):
 class SingleAnswer ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Single Answer", pos = wx.DefaultPosition, size = wx.Size( 1023,326 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Single Answer", pos = wx.DefaultPosition, size = wx.Size( 399,304 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -164,12 +163,17 @@ class SingleAnswer ( wx.Frame ):
 		
 		bSizer4.Add( bSizer5, 1, wx.EXPAND, 5 )
 		
+		self.svar_check_tekst = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.svar_check_tekst.Enable( False )
+		
+		bSizer4.Add( self.svar_check_tekst, 0, wx.ALL, 5 )
+		
 		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
 		
-		self.luk = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.luk = wx.Button( self, wx.ID_ANY, u"Luk", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer6.Add( self.luk, 0, wx.ALL, 5 )
 		
-		self.next = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.next = wx.Button( self, wx.ID_ANY, u"Næste", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.next.Hide()
 		
 		bSizer6.Add( self.next, 0, wx.ALL, 5 )
