@@ -289,7 +289,7 @@ class About ( wx.Frame ):
 		
 		bSizer8 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_textCtrl9 = wx.TextCtrl( self, wx.ID_ANY, u"hje vi hidiefbs  \n\nsdkfsdfn dfsf\n\n\nsdfsd\n", wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
+		self.m_textCtrl9 = wx.TextCtrl( self, wx.ID_ANY, u"Dette er en applikation, der kan hjælpe med at øve matematik. Hvert spørgsmål har en rating. Brugeren starter med en rating på 1000, og får point hvis man svarer rigtigt, men mister hvis man svare forkert. \n\nHvis det er et svært spørgsmål for brugeren (altså spørgsmålets rating er 100 større end brugerens) så får man flere point for at svare rigtigt. ", wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
 		self.m_textCtrl9.Enable( False )
 		
 		bSizer8.Add( self.m_textCtrl9, 1, wx.ALL|wx.EXPAND, 5 )
