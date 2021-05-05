@@ -38,11 +38,28 @@ class MainFrame ( wx.Frame ):
 		
 		self.SetSizer( bSizer1 )
 		self.Layout()
+		self.m_menubar1 = wx.MenuBar( 0 )
+		self.MenuFile = wx.Menu()
+		self.FileQuit = wx.MenuItem( self.MenuFile, wx.ID_ANY, u"Quit", wx.EmptyString, wx.ITEM_NORMAL )
+		self.MenuFile.AppendItem( self.FileQuit )
+		
+		self.m_menubar1.Append( self.MenuFile, u"File" ) 
+		
+		self.MenuHelp = wx.Menu()
+		self.HelpAbout = wx.MenuItem( self.MenuHelp, wx.ID_ANY, u"About", wx.EmptyString, wx.ITEM_NORMAL )
+		self.MenuHelp.AppendItem( self.HelpAbout )
+		
+		self.m_menubar1.Append( self.MenuHelp, u"Help" ) 
+		
+		self.SetMenuBar( self.m_menubar1 )
+		
 		
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
 		self.start.Bind( wx.EVT_BUTTON, self.Start )
+		self.Bind( wx.EVT_MENU, self.OnFileQuit, id = self.FileQuit.GetId() )
+		self.Bind( wx.EVT_MENU, self.OnAbout, id = self.HelpAbout.GetId() )
 	
 	def __del__( self ):
 		pass
@@ -50,6 +67,12 @@ class MainFrame ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def Start( self, event ):
+		event.Skip()
+	
+	def OnFileQuit( self, event ):
+		event.Skip()
+	
+	def OnAbout( self, event ):
 		event.Skip()
 	
 
@@ -105,6 +128,21 @@ class MultipleChoice ( wx.Frame ):
 		
 		self.SetSizer( bSizer3 )
 		self.Layout()
+		self.m_menubar1 = wx.MenuBar( 0 )
+		self.MenuFile = wx.Menu()
+		self.FileQuit = wx.MenuItem( self.MenuFile, wx.ID_ANY, u"Quit", wx.EmptyString, wx.ITEM_NORMAL )
+		self.MenuFile.AppendItem( self.FileQuit )
+		
+		self.m_menubar1.Append( self.MenuFile, u"File" ) 
+		
+		self.MenuHelp = wx.Menu()
+		self.HelpAbout = wx.MenuItem( self.MenuHelp, wx.ID_ANY, u"About", wx.EmptyString, wx.ITEM_NORMAL )
+		self.MenuHelp.AppendItem( self.HelpAbout )
+		
+		self.m_menubar1.Append( self.MenuHelp, u"Help" ) 
+		
+		self.SetMenuBar( self.m_menubar1 )
+		
 		
 		self.Centre( wx.BOTH )
 		
@@ -112,6 +150,8 @@ class MultipleChoice ( wx.Frame ):
 		self.indsend.Bind( wx.EVT_BUTTON, self.indsend_knap )
 		self.luk.Bind( wx.EVT_BUTTON, self.OnLuk )
 		self.next.Bind( wx.EVT_BUTTON, self.OnNext )
+		self.Bind( wx.EVT_MENU, self.OnFileQuit, id = self.FileQuit.GetId() )
+		self.Bind( wx.EVT_MENU, self.OnAbout, id = self.HelpAbout.GetId() )
 	
 	def __del__( self ):
 		pass
@@ -125,6 +165,12 @@ class MultipleChoice ( wx.Frame ):
 		event.Skip()
 	
 	def OnNext( self, event ):
+		event.Skip()
+	
+	def OnFileQuit( self, event ):
+		event.Skip()
+	
+	def OnAbout( self, event ):
 		event.Skip()
 	
 
@@ -184,6 +230,21 @@ class SingleAnswer ( wx.Frame ):
 		
 		self.SetSizer( bSizer4 )
 		self.Layout()
+		self.m_menubar1 = wx.MenuBar( 0 )
+		self.MenuFile = wx.Menu()
+		self.FileQuit = wx.MenuItem( self.MenuFile, wx.ID_ANY, u"Quit", wx.EmptyString, wx.ITEM_NORMAL )
+		self.MenuFile.AppendItem( self.FileQuit )
+		
+		self.m_menubar1.Append( self.MenuFile, u"File" ) 
+		
+		self.MenuHelp = wx.Menu()
+		self.HelpAbout = wx.MenuItem( self.MenuHelp, wx.ID_ANY, u"About", wx.EmptyString, wx.ITEM_NORMAL )
+		self.MenuHelp.AppendItem( self.HelpAbout )
+		
+		self.m_menubar1.Append( self.MenuHelp, u"Help" ) 
+		
+		self.SetMenuBar( self.m_menubar1 )
+		
 		
 		self.Centre( wx.BOTH )
 		
@@ -191,6 +252,8 @@ class SingleAnswer ( wx.Frame ):
 		self.check_svar.Bind( wx.EVT_BUTTON, self.CheckSvar )
 		self.luk.Bind( wx.EVT_BUTTON, self.OnLuk )
 		self.next.Bind( wx.EVT_BUTTON, self.OnNext )
+		self.Bind( wx.EVT_MENU, self.OnFileQuit, id = self.FileQuit.GetId() )
+		self.Bind( wx.EVT_MENU, self.OnAbout, id = self.HelpAbout.GetId() )
 	
 	def __del__( self ):
 		pass
@@ -204,6 +267,51 @@ class SingleAnswer ( wx.Frame ):
 		event.Skip()
 	
 	def OnNext( self, event ):
+		event.Skip()
+	
+	def OnFileQuit( self, event ):
+		event.Skip()
+	
+	def OnAbout( self, event ):
+		event.Skip()
+	
+
+###########################################################################
+## Class About
+###########################################################################
+
+class About ( wx.Frame ):
+	
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"About", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer8 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_textCtrl9 = wx.TextCtrl( self, wx.ID_ANY, u"hje vi hidiefbs  \n\nsdkfsdfn dfsf\n\n\nsdfsd\n", wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE )
+		self.m_textCtrl9.Enable( False )
+		
+		bSizer8.Add( self.m_textCtrl9, 1, wx.ALL|wx.EXPAND, 5 )
+		
+		self.luk = wx.Button( self, wx.ID_ANY, u"Luk", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer8.Add( self.luk, 0, wx.ALL, 5 )
+		
+		
+		self.SetSizer( bSizer8 )
+		self.Layout()
+		
+		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.luk.Bind( wx.EVT_BUTTON, self.OnLuk )
+	
+	def __del__( self ):
+		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def OnLuk( self, event ):
 		event.Skip()
 	
 
