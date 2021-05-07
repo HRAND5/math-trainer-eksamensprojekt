@@ -45,7 +45,7 @@ def parse_question(frame, q):
 def show_multiple(q):
     multiple = Multiple(None)
     parse_question(multiple, q)
-    options = q.alternatives
+    options = q.alternatives.copy()
     options.append(q.answer)
     random.shuffle(options)
     for i in range(0, 4):
